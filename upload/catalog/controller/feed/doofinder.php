@@ -2,7 +2,8 @@
 class ControllerFeedDoofinder extends Controller {
 	public function index() {
         if(isset($this->request->get['language']) && $this->request->get['language'] != $this->session->data['language']){
-            $lang_code = $this->request->get['language'];
+            $lang_code = $this->request->get['language'] ?
+                strtolower($this->request->get['language']): '';
             $this->load->model('localisation/language');
             $languages = $this->model_localisation_language->getLanguages();
             if(in_array($lang_code, array_keys($languages))){
@@ -34,6 +35,8 @@ class ControllerFeedDoofinder extends Controller {
 			$this->load->model('catalog/product');
 
 			$this->load->model('tool/image');
+
+            $this->load->model('localisation/currency');
 
             $total_products = $this->model_catalog_product->getTotalProducts();
 
@@ -84,11 +87,13 @@ class ControllerFeedDoofinder extends Controller {
                     $doofinder_mpn_field = $this->config->get('doofinder_mpn_field') ? $this->config->get('doofinder_mpn_field'): 'mpn';
 					$output .= '<g:mpn><![CDATA[' . $product[$doofinder_mpn_field] . ']]></g:mpn>';
 
-					$currencies = array(
-						'USD', 
-						'EUR', 
-						'GBP'
-					);
+                    $available_currencies = $this->model_localisation_currency->getCurrencies();
+                    $currencies = array();
+                    foreach($available_currencies as $cur){
+                        if($cur['status']){
+                            $currencies[] = $cur['code'];
+                        }
+                    }
 
 					if (in_array($this->currency->getCode(), $currencies)) {
 						$currency_code = $this->currency->getCode();
