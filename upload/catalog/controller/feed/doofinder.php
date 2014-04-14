@@ -10,16 +10,24 @@ class ControllerFeedDoofinder extends Controller {
                 $this->config->set('config_language_id', $languages[$lang_code]['language_id']);
                 $this->config->set('config_language', $languages[$lang_code]['code']);
             }
-            
-
         }
 		if ($this->config->get('doofinder_status')) { 
-			$output  = '<?xml version="1.0" encoding="UTF-8" ?>';
-			$output .= '<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0" xmlns:d="http://www.doofinder.com/ns/1.0">';
-			$output .= '<channel>';
-			$output .= '<title><![CDATA[' . $this->config->get('config_name') . ']]></title>'; 
-			$output .= '<description><![CDATA[' . $this->config->get('config_meta_description') . ']]></description>';
-			$output .= '<link>' . HTTP_SERVER . '</link>';
+
+            // PAGINATION
+
+            $is_paginated = isset($this->request->get['offset']) || isset($this->request->get['limit']);
+
+            $offset = isset($this->request->get['offset']) ?
+                $this->request->get['offset'] : 0;
+            $limit = isset($this->request->get['limit']) ?
+                $this->request->get['limit'] : 1000;
+
+            $data = array();
+            
+            if($is_paginated){
+                $data['start'] = $offset;
+                $data['limit'] = $limit;
+            }
 
 			$this->load->model('catalog/category');
 
@@ -27,7 +35,25 @@ class ControllerFeedDoofinder extends Controller {
 
 			$this->load->model('tool/image');
 
-			$products = $this->model_catalog_product->getProducts();
+            $total_products = $this->model_catalog_product->getTotalProducts();
+
+			$products = $this->model_catalog_product->getProducts($data);
+
+            $output = '';
+
+
+
+            
+            if(!$offset){
+                $output  = '<?xml version="1.0" encoding="UTF-8" ?>';
+                $output .= '<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0" xmlns:d="http://www.doofinder.com/ns/1.0">';
+                $output .= '<channel>';
+                $output .= '<title><![CDATA[' . $this->config->get('config_name') . ']]></title>'; 
+                $output .= '<description><![CDATA[' . $this->config->get('config_meta_description') . ']]></description>';
+                $output .= '<link>' . HTTP_SERVER . '</link>';
+            }
+
+
 
             // CUSTOM FEED OPTIONS
             $display_prices = $this->config->get('doofinder_display_prices') !== null ? 
@@ -121,8 +147,10 @@ class ControllerFeedDoofinder extends Controller {
 				}
 			}
 
-			$output .= '</channel>'; 
-			$output .= '</rss>';	
+            if(!$is_paginated || ($offset <= $total_products && ($offset+$limit) >= $total_products)) {
+                $output .= '</channel>'; 
+                $output .= '</rss>';	
+            }
 
 			$this->response->addHeader('Content-Type: application/xml');
 			$this->response->setOutput($output);
