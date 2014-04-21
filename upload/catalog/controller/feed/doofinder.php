@@ -125,7 +125,7 @@ class ControllerFeedDoofinder extends Controller {
                             $paths = explode('_', $path);
 
                             if(!$full_category_path){
-                                $paths = [array_pop($paths)];
+                                unset($paths[count($paths)-1]);
                             }
 
 							foreach ($paths as $path_id) {

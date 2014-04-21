@@ -1,0 +1,7 @@
+*.pyc
+.scrapy
+*~
+load_tests/queries/results
+.DS_Store
+wordforms_*.txt
+media/*
