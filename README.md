@@ -19,12 +19,14 @@ Plugin to configure the [Doofinder](http://www.doofinder.com) search service in 
  
  * Go to _admin/extensions/product feeds_ section of your opencart admin page. You will see the "Doofinder" product feed in the listing.
  * If for the first time, Click on "install"
- * Click on "edit". You can configure there how you want your product data to be exported through the product feed. You can also see there the urls of the doofinder product feed that your open cart site is serving.
+ * Click on "edit". You can configure there how you want your product data to be exported through the product feed. You can also see there the urls of the doofinder product feed that your open cart site is serving. There is one for each one of your site's currency and language.
  
  
 ### The Doofinder Script
 
- Whenever you want in any page of your site that the searchbox is responsive to user input, you'll need certain script to be included in that page. You need to generate it and to make sure it's located in any page you want the results layer to work on.
+ Whenever you want in any page of your site that the searchbox is responsive to user input, you'll need certain script to be included in that page. You need to generate it and to make sure it's located in any page you want the results layer to work on. 
+ 
+ If your site can be served in several languages and currencies, you'll need to use a search engine for each one of those, and generate a different script for each.
  
 #### Obtain the script ...
 
@@ -52,10 +54,11 @@ Plugin to configure the [Doofinder](http://www.doofinder.com) search service in 
     </script>
 ```
  * The obtained script will be available from now on in your doofinder control panel.
+ * Remember you have to do this for every search engine you may have defined for the different language/currency combinations you may have available in your site.
  
 #### and then put it in your opencart site
 
- * Go to your _admin/modules/doofinder_ section of your opencart admin page. Paste the code obtained in the previous step.
+ * Go to your _admin/modules/doofinder_ section of your opencart admin page. Paste the code obtained in the previous step. You'll find a text box for each combination of language/currency your site has available. 
  * In that same page, you can add the module to whichever layout of your opencart site you want.
  
 
