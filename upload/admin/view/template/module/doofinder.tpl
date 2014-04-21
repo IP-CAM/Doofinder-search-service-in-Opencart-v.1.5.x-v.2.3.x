@@ -15,15 +15,20 @@
     </div>
     <div class="content">
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
+     <div class="content"><?php echo $entry_code;?></div>
+     <?php foreach($doofinder_codes as $lang_code => $doofinder_currency_codes):?>
         <table class="form">
           <tr>
-            <td><span class="required">*</span> <?php echo $entry_code; ?></td>
-            <td><textarea name="doofinder_code" cols="40" rows="5"><?php echo $doofinder_code; ?></textarea>
+     <td style="width:50px;"><?php echo strtoupper($lang_code) ?></td>
+     <?php foreach($doofinder_currency_codes as $cur_code => $code):?>
+     <td><?php echo strtoupper($cur_code) ?><br/><textarea name="doofinder_code_<?php echo $lang_code ?>_<?php echo $cur_code ?>" cols="40" rows="5"><?php echo $code; ?></textarea>
               <?php if ($error_code) { ?>
               <span class="error"><?php echo $error_code; ?></span>
               <?php } ?></td>
+<?php endforeach ?>
           </tr>
         </table>
+<?php endforeach ?>
         <table id="module" class="list">
           <thead>
             <tr>

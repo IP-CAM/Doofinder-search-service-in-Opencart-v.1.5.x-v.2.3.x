@@ -4,12 +4,12 @@ class ControllerModuleDoofinder extends Controller {
 		$this->language->load('module/doofinder');
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
+
+        $cur_code = strtolower($this->currency->getCode());
+        $lang_code = strtolower($this->language->get('code'));
+
+        $this->data['code'] = html_entity_decode($this->config->get('doofinder_code_'.$lang_code.'_'.$cur_code));
 		
-		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
-			$this->data['code'] = str_replace('http', 'https', html_entity_decode($this->config->get('doofinder_code')));
-		} else {
-			$this->data['code'] = html_entity_decode($this->config->get('doofinder_code'));
-		}
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/doofinder.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/module/doofinder.tpl';

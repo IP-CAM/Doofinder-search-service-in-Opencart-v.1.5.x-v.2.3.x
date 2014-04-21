@@ -5,6 +5,12 @@ class ControllerModuleDoofinder extends Controller {
 	public function index() {   
 		$this->language->load('module/doofinder');
 
+        $this->load->model('localisation/language');
+        $languages = $this->model_localisation_language->getLanguages();
+        $this->load->model('localisation/currency');
+        $currencies = $this->model_localisation_currency->getCurrencies();
+        
+
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('setting/setting');
@@ -73,11 +79,23 @@ class ControllerModuleDoofinder extends Controller {
 
 		$this->data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
 
-		if (isset($this->request->post['doofinder_code'])) {
-			$this->data['doofinder_code'] = $this->request->post['doofinder_code'];
-		} else {
-			$this->data['doofinder_code'] = $this->config->get('doofinder_code');
-		}	
+        $this->data['doofinder_codes'] = array();
+
+        foreach($languages as $lang_code => $lang_description){
+            $lang_code = strtolower($lang_code);
+            $this->data['doofinder_codes'][$lang_code] = array();
+            foreach($currencies as $currency){
+                $cur_code = strtolower($currency['code']);
+                $parameter_name = 'doofinder_code_'.$lang_code.'_'.$cur_code;
+                if(isset($this->request->post[$parameter_name]) && trim($this->request->post[$parameter_name]) != ''){
+                    $this->data['doofinder_codes'][$lang_code][$cur_code] = $this->request->post[$parameter_name];
+                } else if ($this->config->get($parameter_name) !== null && ($this->config->get($parameter_name)) != ''){
+                    $this->data['doofinder_codes'][$lang_code][$cur_code] = $this->config->get($parameter_name);
+                } else {
+                    $this->data['doofinder_codes'][$lang_code][$cur_code] = null;
+                }
+            }
+        }
 
 		$this->data['modules'] = array();
 
@@ -105,9 +123,6 @@ class ControllerModuleDoofinder extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
-		if (!$this->request->post['doofinder_code']) {
-			$this->error['code'] = $this->language->get('error_code');
-		}
 
 		if (!$this->error) {
 			return true;
