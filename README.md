@@ -9,7 +9,7 @@ Plugin to configure the [Doofinder](http://www.doofinder.com) search service in 
 
  * Get the latest package from [here] (https://github.com/doofinder/doofinder-opencart/releases)
  * Unzip / Untar the package. You'll find this README file and an "upload" folder
- * Upload the contents of the local "upload" folder to the remote "upload" folder of your opencart setup.
+ * Upload the contents of the "upload" folder to the remote folder of your opencart setup. If you need more info about how to install third party modules in opencart check [this article](http://docs.opencart.com/display/opencart/Installing+3rd+party+modules).
  
 ## Configuration
 
