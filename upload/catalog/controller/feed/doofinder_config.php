@@ -1,8 +1,8 @@
-<?php 
+<?php
 class ControllerFeedDoofinderConfig extends Controller {
 	public function index() {
         $config = array();
-        $plattform = array('name'=>'OpenCart', 'version'=>'1.5.6.1');
+        $platform = array('name'=>'OpenCart', 'version' => VERSION);
         $module = array('version'=>'1.0.0', 'feed'=> HTTP_SERVER. 'index.php?route=feed/doofinder');
         $this->load->model('localisation/language');
         $languages = $this->model_localisation_language->getLanguages();
@@ -17,15 +17,15 @@ class ControllerFeedDoofinderConfig extends Controller {
             }
         }
 
-        $config['plattform'] = $plattform;
+        $config['platform'] = $platform;
         $config['module'] = $module;
-        $config['options'] = $options;
+        $config['module']['options'] = $options;
 
         $this->response->addHeader("Content-Type:application/json; charset=utf-8");
         $this->response->setOutput($this->json_encode($config));
     }
 
-    
+
 
     private function json_encode($data){
         function walk_apply_html_entities($item, $key){
