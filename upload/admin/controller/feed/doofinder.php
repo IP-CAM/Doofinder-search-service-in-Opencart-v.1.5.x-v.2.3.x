@@ -4,12 +4,12 @@ class ControllerFeedDoofinder extends Controller {
 
     public function install(){
         $this->load->model('setting/setting');
-        $this->model_setting_setting->editSetting('doofinder', array('doofinder_status'=>1));
+        $this->model_setting_setting->editSetting('doofinder_feed', array('doofinder_status'=>1));
     }
 
     public function uninstall(){
         $this->load->model('setting/setting');
-        $this->model_setting_setting->editSetting('doofinder', array('doofinder_status'=>0));
+        $this->model_setting_setting->editSetting('doofinder_feed', array('doofinder_status'=>0));
     }
 
 	public function index() {
@@ -24,7 +24,7 @@ class ControllerFeedDoofinder extends Controller {
 		$this->load->model('setting/setting');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editSetting('doofinder', $this->request->post);				
+			$this->model_setting_setting->editSetting('doofinder_feed', $this->request->post);				
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
