@@ -3,6 +3,8 @@
 $_['heading_title']    = 'Doofinder Feed';
 
 // Text   
+$_['text_edit']        = 'Edit Doofinder Feed';
+$_['text_extension']   = 'Extensions';
 $_['text_feed']        = 'Product Feeds';
 $_['text_success']     = 'Success: You have modified Doofinder feed!';
 

@@ -36,7 +36,7 @@ class ControllerExtensionFeedDoofinder extends Controller {
                 );
 
                 $data['breadcrumbs'][] = array(
-                        'text' => $this->language->get('text_module'),
+                        'text' => $this->language->get('text_extension'),
                         'href' => $this->url->link('extension/extension', 'token=' . $this->session->data['token'], true),
                 );
 
@@ -50,6 +50,7 @@ class ControllerExtensionFeedDoofinder extends Controller {
                 $data['action'] = $this->url->link('extension/feed/doofinder', 'token=' . $this->session->data['token'], true);
 
                 $data['heading_title'] = $this->language->get('heading_title');
+                $data['text_edit'] = $this->language->get('text_edit');
                 $data['button_cancel'] = $this->language->get('button_cancel');
                 $data['button_save'] = $this->language->get('button_save');
                 $data['text_enabled'] = $this->language->get('text_enabled');
