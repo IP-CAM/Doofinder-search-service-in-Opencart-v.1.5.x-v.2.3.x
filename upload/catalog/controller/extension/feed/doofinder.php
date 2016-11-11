@@ -44,9 +44,6 @@ class ControllerExtensionFeedDoofinder extends Controller {
 
             $output = '';
 
-
-
-
             if(!$offset){
                 $output  = '<?xml version="1.0" encoding="UTF-8" ?>';
                 $output .= '<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0" xmlns:d="http://www.doofinder.com/ns/1.0">';
@@ -55,7 +52,6 @@ class ControllerExtensionFeedDoofinder extends Controller {
                 $output .= '<description><![CDATA[' . $this->config->get('config_meta_description') . ']]></description>';
                 $output .= '<link>' . HTTP_SERVER . '</link>';
             }
-
 
 
             // CUSTOM FEED OPTIONS

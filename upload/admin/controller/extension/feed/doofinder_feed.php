@@ -1,11 +1,11 @@
 <?php
-class ControllerExtensionFeedDoofinder extends Controller {
+class ControllerExtensionFeedDoofinderfeed extends Controller {
         private $error = array();
 
     public function install(){
         $this->load->model('setting/setting');
-        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'extension/doofinder');
-        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'extension/doofinder');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'extension/doofinder_feed');
+        $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'extension/doofinder_feed');
         $settings = $this->model_setting_setting->getSetting('doofinder_feed');
         $settings['doofinder_feed_status'] = 1;
         $this->model_setting_setting->editSetting('doofinder_feed', $settings);
@@ -19,7 +19,7 @@ class ControllerExtensionFeedDoofinder extends Controller {
     }
 
         public function index() {
-                $this->language->load('extension/feed/doofinder');
+                $this->language->load('extension/feed/doofinder_feed');
 
         $this->load->model('localisation/language');
         $languages = $this->model_localisation_language->getLanguages();
@@ -42,12 +42,12 @@ class ControllerExtensionFeedDoofinder extends Controller {
 
                 $data['breadcrumbs'][] = array(
                         'text'      => $this->language->get('heading_title'),
-                        'href'      => $this->url->link('extension/feed/doofinder', 'token=' . $this->session->data['token'], true),
+                        'href'      => $this->url->link('extension/feed/doofinder_feed', 'token=' . $this->session->data['token'], true),
                         'separator' => ' :: '
                 );
 
                 $data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=feed', true);
-                $data['action'] = $this->url->link('extension/feed/doofinder', 'token=' . $this->session->data['token'], true);
+                $data['action'] = $this->url->link('extension/feed/doofinder_feed', 'token=' . $this->session->data['token'], true);
 
                 $data['heading_title'] = $this->language->get('heading_title');
                 $data['text_edit'] = $this->language->get('text_edit');
@@ -137,16 +137,16 @@ class ControllerExtensionFeedDoofinder extends Controller {
                 $this->load->model('localisation/currency');
         foreach($languages as $lang_code => $lang_description){
             foreach($this->model_localisation_currency->getCurrencies() as $currency){
-                $data['data_feeds'][$lang_description['name']][$currency['title']] =  HTTP_CATALOG . 'index.php?route=feed/doofinder&amp;currency='.$currency['code'].'&amp;language='.$lang_code;
+                $data['data_feeds'][$lang_description['name']][$currency['title']] =  HTTP_CATALOG . 'index.php?route=extension/feed/doofinder&amp;currency='.$currency['code'].'&amp;language='.$lang_code;
             }
         }
 
-        $this->response->setOutput($this->load->view('extension/feed/doofinder', $data));
+        $this->response->setOutput($this->load->view('extension/feed/doofinder_feed', $data));
 
         }
 
         protected function validate() {
-                if (!$this->user->hasPermission('modify', 'extension/feed/doofinder')) {
+                if (!$this->user->hasPermission('modify', 'extension/feed/doofinder_feed')) {
                         $this->error['warning'] = $this->language->get('error_permission');
                 }
 

@@ -2,7 +2,7 @@
 // Heading
 $_['heading_title']    = 'Doofinder Feed';
 
-// Text   
+// Text
 $_['text_edit']        = 'Edit Doofinder Feed';
 $_['text_extension']   = 'Extensions';
 $_['text_feed']        = 'Product Feeds';

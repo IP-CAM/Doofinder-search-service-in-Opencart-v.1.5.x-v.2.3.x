@@ -3,8 +3,9 @@
 $_['heading_title']       = 'Doofinder Script';
 
 // Text
-$_['text_module']         = 'Modules';
+$_['text_extension']         = 'Extensions';
 $_['text_success']        = 'Success: You have modified module Doofinder!';
+$_['text_edit']           = 'Edit Doofinder Script';
 $_['text_content_top']    = 'Content Top';
 $_['text_content_bottom'] = 'Content Bottom';
 $_['text_column_left']    = 'Column Left';
