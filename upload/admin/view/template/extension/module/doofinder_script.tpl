@@ -56,7 +56,7 @@
             <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_status; ?></label>
             <div class="col-sm-10">
               <select name="doofinder_script_status" id="input-status" class="form-control">
-                <?php if ($google_script_status) { ?>
+                <?php if ($doofinder_script_status) { ?>
                 <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                 <option value="0"><?php echo $text_disabled; ?></option>
                 <?php } else { ?>

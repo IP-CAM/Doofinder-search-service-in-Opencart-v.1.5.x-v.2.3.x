@@ -79,6 +79,9 @@ class ControllerExtensionModuleDoofinderscript extends Controller {
 
         foreach($languages as $lang_code => $lang_description){
             $lang_code = strtolower($lang_code);
+            if(strpos($lang_code, '-')){
+                $lang_code =  strstr($lang_code, '-',  true);
+            }
             $data['doofinder_codes'][$lang_code] = array();
             foreach($currencies as $currency){
                 $cur_code = strtolower($currency['code']);
