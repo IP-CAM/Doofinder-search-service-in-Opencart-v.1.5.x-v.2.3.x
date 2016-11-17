@@ -1,8 +1,8 @@
 <?php
-class ControllerExtensionModuleDoofinderScript extends Controller {
+class ControllerModuleDoofinderScript extends Controller {
     public function index() {
 
-        $this->load->language('extension/module/doofinder_script');
+        $this->load->language('module/doofinder_script');
 
         $data['heading_title'] = $this->language->get('heading_title');
         $cur_code = strtolower($this->session->data['currency']);
@@ -18,7 +18,7 @@ class ControllerExtensionModuleDoofinderScript extends Controller {
             $data['code'] = html_entity_decode($this->config->get('doofinder_script_'.$lang_code.'_'.$cur_code));
         }
 
-        return $this->load->view('extension/module/doofinder_script', $data);
+        return $this->load->view('default/template/module/doofinder_script.tpl', $data);
     }
 }
 ?>

@@ -1,9 +1,9 @@
 <?php
-class ControllerExtensionModuleDoofinderscript extends Controller {
+class ControllerModuleDoofinderscript extends Controller {
     private $error = array();
 
     public function index() {
-        $this->load->language('extension/module/doofinder_script');
+        $this->load->language('module/doofinder_script');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
@@ -13,7 +13,7 @@ class ControllerExtensionModuleDoofinderscript extends Controller {
             $this->model_setting_setting->editSetting('doofinder_script', $this->request->post);
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=module', true));
+            $this->response->redirect($this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL'));
         }
 
         $this->load->model('localisation/language');
@@ -58,22 +58,22 @@ class ControllerExtensionModuleDoofinderscript extends Controller {
 
         $data['breadcrumbs'][] = array(
             'text'      => $this->language->get('text_home'),
-            'href'      => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
+            'href'      => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
         );
 
         $data['breadcrumbs'][] = array(
-            'text'      => $this->language->get('text_extension'),
-            'href'      => $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=module', true)
+            'text'      => $this->language->get('text_module'),
+            'href'      => $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL')
         );
 
         $data['breadcrumbs'][] = array(
             'text'      => $this->language->get('heading_title'),
-            'href'      => $this->url->link('extension/module/doofinder_script', 'token=' . $this->session->data['token'], true)
+            'href'      => $this->url->link('module/doofinder_script', 'token=' . $this->session->data['token'], 'SSL')
         );
 
-        $data['action'] = $this->url->link('extension/module/doofinder_script', 'token=' . $this->session->data['token'], true);
+        $data['action'] = $this->url->link('module/doofinder_script', 'token=' . $this->session->data['token'], 'SSL');
 
-        $data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=module', true);
+        $data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'] , 'SSL');
 
         $data['doofinder_codes'] = array();
 
@@ -110,20 +110,15 @@ class ControllerExtensionModuleDoofinderscript extends Controller {
         $data['footer'] = $this->load->controller('common/footer');
 
 
-        $this->response->setOutput($this->load->view('extension/module/doofinder_script', $data));
+        $this->response->setOutput($this->load->view('module/doofinder_script.tpl', $data));
     }
 
     protected function validate() {
-        if (!$this->user->hasPermission('modify', 'extension/module/doofinder_script')) {
+        if (!$this->user->hasPermission('modify', 'module/doofinder_script')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
 
-
-        if (!$this->error) {
-            return true;
-        } else {
-            return false;
-        }
+        return !$this->error;
     }
 }
 ?>

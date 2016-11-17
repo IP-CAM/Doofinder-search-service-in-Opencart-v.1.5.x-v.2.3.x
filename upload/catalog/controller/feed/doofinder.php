@@ -1,5 +1,5 @@
 <?php
-class ControllerExtensionFeedDoofinder extends Controller {
+class ControllerFeedDoofinder extends Controller {
     public function index() {
         if(isset($this->request->get['language']) && $this->request->get['language'] != $this->session->data['language']){
             $lang_code = $this->request->get['language'] ?
