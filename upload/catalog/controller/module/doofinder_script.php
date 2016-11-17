@@ -18,7 +18,7 @@ class ControllerModuleDoofinderScript extends Controller {
             $data['code'] = html_entity_decode($this->config->get('doofinder_script_'.$lang_code.'_'.$cur_code));
         }
 
-        return $this->load->view('default/template/module/doofinder_script.tpl', $data);
+        return $this->load->view('module/doofinder_script.tpl', $data);
     }
 }
 ?>
