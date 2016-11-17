@@ -3,7 +3,7 @@ class ControllerExtensionFeedDoofinderConfig extends Controller {
     public function index() {
         $config = array();
         $platform = array('name'=>'OpenCart', 'version' => VERSION);
-        $module = array('version'=>'2.0.0', 'feed'=> HTTP_SERVER. 'index.php?route=extension/feed/doofinder');
+        $module = array('version'=>'2.0.4', 'feed'=> HTTP_SERVER. 'index.php?route=extension/feed/doofinder');
         $this->load->model('localisation/language');
         $languages = $this->model_localisation_language->getLanguages();
         $options = array();
