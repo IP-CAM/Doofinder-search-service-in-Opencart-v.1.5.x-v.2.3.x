@@ -9,6 +9,8 @@ Plugin to configure the [Doofinder](http://www.doofinder.com) search service in 
 
  * Get the latest package for your opencart version from [here] (https://github.com/doofinder/doofinder-opencart/releases)
    - If your opencart is `1.5.x`, fetch the latest `v1.x.y` tarball
+   - If your opencart is `2.0.x` or `2.1.x`, fetch the latest `v1.2.0.z` tarball
+   - If your opencart is `2.2.x`, fetch the latest `v1.2.2.z` tarball
    - If your opencart is `2.3.x`, fetch the latest `v2.x.y` tarball
  * Unzip / Untar the package. You'll find this README file and an "upload" folder
  * Upload the contents of the "upload" folder to the remote folder of your opencart setup. If you need more info about how to install third party modules in opencart check [this article](http://docs.opencart.com/display/opencart/Installing+3rd+party+modules).
@@ -60,7 +62,7 @@ Plugin to configure the [Doofinder](http://www.doofinder.com) search service in 
  
 #### and then put it in your opencart site
 
- * In Opencart 1.5.x
+ * In Opencart 1.5.x, 2.0.x, 2.1.x, 2.2.x
    - Go to your _admin/modules/doofinder_ section of your opencart admin page.
    - Paste the code obtained in the previous step. You'll find a text box for each combination of language/currency your site has available. 
    -  In that same page, you can add the module to whichever layout of your opencart site you want.
